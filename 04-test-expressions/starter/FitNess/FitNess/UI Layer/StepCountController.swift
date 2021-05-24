@@ -50,16 +50,6 @@ class StepCountController: UIViewController {
   @IBOutlet var startButton: UIButton!
   @IBOutlet weak var chaseView: ChaseView!
 
-  init() {
-    // this is a cheat to simplify chapter 3, a proper way of getting an instance will be handled in chapter 4
-    super.init(nibName: nil, bundle: nil)
-    startButton = UIButton()
-  }
-
-  required init?(coder aDecoder: NSCoder) {
-    super.init(coder: aDecoder)
-  }
-
   override func viewDidLoad() {
     super.viewDidLoad()
 
@@ -79,7 +69,11 @@ class StepCountController: UIViewController {
   // MARK: - UI Actions
   
   @IBAction func startStopPause(_ sender: Any?) {
-    AppModel.instance.start()
+    do {
+      try AppModel.instance.start()
+    } catch {
+      showNeedGoalAlert()
+    }
     
     updateUI()
   }
@@ -90,10 +84,10 @@ class StepCountController: UIViewController {
 }
 
 // MARK: - Goal
-extension StepCountController {
 
+extension StepCountController {
   func updateGoal(newGoal: Int) {
-    // update this function
+    AppModel.instance.dataModel.goal = newGoal
   }
 
   private func showNeedGoalAlert() {
@@ -120,7 +114,7 @@ extension StepCountController {
         let goal = Int(numberString) {
           self?.updateGoal(newGoal: goal)
       } else {
-          self?.updateGoal(newGoal: 0)
+        self?.updateGoal(newGoal: 0)
       }
     }
     alertController.addAction(action)
@@ -132,6 +126,6 @@ extension StepCountController {
 extension StepCountController {
 
   private func updateChaseView() {
-    // update this function
+    chaseView.state = AppModel.instance.appState
   }
 }

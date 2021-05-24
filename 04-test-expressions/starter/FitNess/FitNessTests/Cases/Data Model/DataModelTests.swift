@@ -29,99 +29,89 @@
 import XCTest
 @testable import FitNess
 
-class StepCountControllerTests: XCTestCase {
+class DataModelTests: XCTestCase {
 
-  var sut: StepCountController!
-
-  // MARK: - Test Lifecycle
+  var sut: DataModel!
 
   override func setUp() {
     super.setUp()
-    let rootController = loadRootViewController()
-    sut = rootController.stepController
+    sut = DataModel()
   }
 
   override func tearDown() {
-    AppModel.instance.restart()
-    sut.updateUI()
+    sut = nil
     super.tearDown()
   }
 
-  // MARK: - Given
+  func testModel_whenRestart_clearsProgress() {
+    // given
+    sut.goal = 1000
+    sut.distance = 10
+    sut.steps = 10
+    sut.nessie.distance = 70
 
-  func givenGoalSet() {
-    AppModel.instance.dataModel.goal = 1000
-  }
+    // when
+    sut.restart()
 
-  func givenInProgress() {
-    givenGoalSet()
-    sut.startStopPause(nil)
-    // inProgress ensured by testController_whenStartTapped_appIsInProgress
-  }
-  
-  // MARK: - When
-
-  fileprivate func whenStartStopPauseCalled() {
-    sut.startStopPause(nil)
-  }
-
-  // MARK: - Initial State
-
-  func testController_whenCreated_buttonLabelIsStart() {
-    // when loaded, then
-    let text = sut.startButton.title(for: .normal)
-    XCTAssertEqual(text, AppState.notStarted.nextStateButtonLabel)
+    // then
+    XCTAssertNil(sut.goal)
+    XCTAssertEqual(sut.distance, 0)
+    XCTAssertEqual(sut.steps, 0)
+    XCTAssertEqual(sut.nessie.distance, 0)
   }
 
   // MARK: - Goal
 
-  func testDataModel_whenGoalUpdate_updatesToNewGoal() {
-    // when
-    sut.updateGoal(newGoal: 50)
-
-    // then
-    XCTAssertEqual(AppModel.instance.dataModel.goal, 50)
+  func testModel_whenStarted_goalIsNotReached() {
+    XCTAssertFalse(sut.goalReached,
+                   "goalReached should be false when the model is created")
   }
 
-  // MARK: - In Progress
-
-  func testController_whenStartTapped_appIsInProgress() {
+  func testModel_whenStepsReachGoal_goalIsReached() {
     // given
-    givenGoalSet()
+    sut.goal = 1000
 
     // when
-    whenStartStopPauseCalled()
+    sut.steps = 1000
 
     // then
-    let state = AppModel.instance.appState
-    XCTAssertEqual(state, AppState.inProgress)
+    XCTAssertTrue(sut.goalReached)
   }
 
-  func testController_whenStartTapped_buttonLabelIsPause() {
+  func testGoal_whenUserCaught_cannotBeReached() {
+    //given goal should be reached
+    sut.goal = 1000
+    sut.steps = 1000
+
+    // when caught by nessie
+    sut.distance = 100
+    sut.nessie.distance = 100
+
+    // then
+    XCTAssertFalse(sut.goalReached)
+  }
+
+  // MARK: - Nessie
+
+  func testModel_whenStarted_userIsNotCaught() {
+    XCTAssertFalse(sut.caught)
+  }
+
+  func testModel_whenUserAheadOfNessie_isNotCaught() {
     // given
-    givenGoalSet()
-
-    // when
-    whenStartStopPauseCalled()
+    sut.distance = 1000
+    sut.nessie.distance = 100
 
     // then
-    let text = sut.startButton.title(for: .normal)
-    XCTAssertEqual(text, AppState.inProgress.nextStateButtonLabel)
+    XCTAssertFalse(sut.caught)
   }
 
-  // MARK: - Chase View
-  func testChaseView_whenLoaded_isNotStarted() {
-    // when loaded, then
-    let chaseView = sut.chaseView
-    XCTAssertEqual(chaseView?.state, AppState.notStarted)
-  }
-
-  func testChaseView_whenInProgress_viewIsInProgress() {
+  func testModel_whenNessieAheadofUser_isCaught() {
     // given
-    givenInProgress()
+    sut.nessie.distance = 1000
+    sut.distance = 100
 
     // then
-    let chaseView = sut.chaseView
-    XCTAssertEqual(chaseView?.state, AppState.inProgress)
+    XCTAssertTrue(sut.caught)
   }
 }

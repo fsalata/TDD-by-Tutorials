@@ -26,30 +26,10 @@
 /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 /// THE SOFTWARE.
 
-import Foundation
+import UIKit
+@testable import FitNess
 
-class AppModel {
-
-  static let instance = AppModel()
-
-  let dataModel = DataModel()
-
-  private(set) var appState: AppState = .notStarted
-
-  func start() throws {
-    guard dataModel.goal != nil else {
-      throw AppError.goalNotSet
-    }
-    
-    appState = .inProgress
-  }
-
-  func pause() {
-    appState = .paused
-  }
-
-  func restart() {
-    appState = .notStarted
-    dataModel.restart()
-  }
+func loadRootViewController() -> RootViewController {
+  let window = UIApplication.shared.windows[0]
+  return window.rootViewController as! RootViewController
 }

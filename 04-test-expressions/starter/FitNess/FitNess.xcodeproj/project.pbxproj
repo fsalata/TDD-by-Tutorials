@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		00516EC0265BE2A2007EC520 /* ViewControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2EC8E121D41D030091A995 /* ViewControllers.swift */; };
 		0A1BDA14218E542100804262 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1BDA0B218E541D00804262 /* RootViewController.swift */; };
 		0A1BDA15218E542100804262 /* StepCountController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1BDA0C218E541E00804262 /* StepCountController.swift */; };
 		0A1BDA16218E542100804262 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A1BDA0D218E541E00804262 /* Main.storyboard */; };
@@ -14,8 +15,10 @@
 		0A21C7E021C6CF1200169D8B /* AppModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A21C7DF21C6CF1200169D8B /* AppModelTests.swift */; };
 		0A21C7E221C70AE400169D8B /* StepCountControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A21C7E121C70AE400169D8B /* StepCountControllerTests.swift */; };
 		0A2EC8DF21D3E7020091A995 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2EC8DE21D3E7020091A995 /* AppError.swift */; };
+		0A2EC8E521D41E240091A995 /* RootViewController+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2EC8E421D41E240091A995 /* RootViewController+Tests.swift */; };
 		0A2EC8E721D47E5E0091A995 /* Nessie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2EC8E621D47E5E0091A995 /* Nessie.swift */; };
 		0A80ED3B21CB2A14000B04E3 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A80ED3A21CB2A14000B04E3 /* DataModel.swift */; };
+		0A80ED3F21CB2F93000B04E3 /* DataModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A80ED3E21CB2F93000B04E3 /* DataModelTests.swift */; };
 		0A9EB50B21C072F00062B66E /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9EB50A21C072F00062B66E /* AppModel.swift */; };
 		0AA5E735219B9B4600B7A0D0 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA5E734219B9B4600B7A0D0 /* AppState.swift */; };
 		5C2901831F8F6DE700803663 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C2901821F8F6DE700803663 /* LaunchScreen.storyboard */; };
@@ -43,8 +46,11 @@
 		0A21C7DF21C6CF1200169D8B /* AppModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModelTests.swift; sourceTree = "<group>"; };
 		0A21C7E121C70AE400169D8B /* StepCountControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepCountControllerTests.swift; sourceTree = "<group>"; };
 		0A2EC8DE21D3E7020091A995 /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
+		0A2EC8E121D41D030091A995 /* ViewControllers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllers.swift; sourceTree = "<group>"; };
+		0A2EC8E421D41E240091A995 /* RootViewController+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RootViewController+Tests.swift"; sourceTree = "<group>"; };
 		0A2EC8E621D47E5E0091A995 /* Nessie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nessie.swift; sourceTree = "<group>"; };
 		0A80ED3A21CB2A14000B04E3 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		0A80ED3E21CB2F93000B04E3 /* DataModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModelTests.swift; sourceTree = "<group>"; };
 		0A9EB50A21C072F00062B66E /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
 		0AA5E734219B9B4600B7A0D0 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		5C2901821F8F6DE700803663 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -77,6 +83,8 @@
 			children = (
 				0A21C7D921C6BF8B00169D8B /* Info.plist */,
 				0A21C7E321C70C5800169D8B /* Cases */,
+				0A2EC8E021D41CD80091A995 /* Test Classes */,
+				0A2EC8E321D41E150091A995 /* Test Extensions */,
 			);
 			path = FitNessTests;
 			sourceTree = "<group>";
@@ -116,6 +124,22 @@
 			path = "Assets & Info";
 			sourceTree = "<group>";
 		};
+		0A2EC8E021D41CD80091A995 /* Test Classes */ = {
+			isa = PBXGroup;
+			children = (
+				0A2EC8E121D41D030091A995 /* ViewControllers.swift */,
+			);
+			path = "Test Classes";
+			sourceTree = "<group>";
+		};
+		0A2EC8E321D41E150091A995 /* Test Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				0A2EC8E421D41E240091A995 /* RootViewController+Tests.swift */,
+			);
+			path = "Test Extensions";
+			sourceTree = "<group>";
+		};
 		0A311FFC219102ED00AE4720 /* App Layer */ = {
 			isa = PBXGroup;
 			children = (
@@ -137,6 +161,7 @@
 		0A80ED3D21CB2A4C000B04E3 /* Data Model */ = {
 			isa = PBXGroup;
 			children = (
+				0A80ED3E21CB2F93000B04E3 /* DataModelTests.swift */,
 			);
 			path = "Data Model";
 			sourceTree = "<group>";
@@ -298,6 +323,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A2EC8E521D41E240091A995 /* RootViewController+Tests.swift in Sources */,
+				0A80ED3F21CB2F93000B04E3 /* DataModelTests.swift in Sources */,
+				00516EC0265BE2A2007EC520 /* ViewControllers.swift in Sources */,
 				0A21C7E021C6CF1200169D8B /* AppModelTests.swift in Sources */,
 				0A21C7E221C70AE400169D8B /* StepCountControllerTests.swift in Sources */,
 			);
