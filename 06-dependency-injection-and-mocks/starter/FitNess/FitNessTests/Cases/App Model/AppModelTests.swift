@@ -32,16 +32,19 @@ import XCTest
 class AppModelTests: XCTestCase {
 
   var sut: AppModel!
+  var mockPedometer: MockPedometer!
 
   override func setUp() {
     super.setUp()
-    sut = AppModel()
+    mockPedometer = MockPedometer()
+    sut = AppModel(pedometer: mockPedometer)
   }
 
   override func tearDown() {
     AlertCenter.instance.clearAlerts()
     sut.stateChangedCallback = nil
     sut = nil
+    mockPedometer = nil
     super.tearDown()
   }
 
@@ -197,4 +200,92 @@ class AppModelTests: XCTestCase {
   }
 
   // MARK: - Pedometer
+  func testAppModel_whenStarted_startsPedometer() {
+    //given
+    givenGoalSet()
+
+    // when
+    try! sut.start()
+
+    // then
+    XCTAssertTrue(mockPedometer.started)
+  }
+
+  func testPedometerNotAvailable_whenStarted_doesNotStart() {
+    // given
+    givenGoalSet()
+    mockPedometer.pedometerAvailable = false
+
+    // when
+    try! sut.start()
+
+    // then
+    XCTAssertEqual(sut.appState, .notStarted)
+  }
+
+  func testPedometerNotAvailable_whenStarted_generatesAlert() {
+    // given
+    givenGoalSet()
+    mockPedometer.pedometerAvailable = false
+    let exp = expectation(forNotification: AlertNotification.name, object: nil, handler: alertHandler(.noPedometer))
+
+    // when
+    try! sut.start()
+
+    // then
+    wait(for: [exp], timeout: 1)
+  }
+
+  func testPedometerNotAuthorized_whenStarted_doesNotStart() {
+    // given
+    givenGoalSet()
+    mockPedometer.permissionDeclined = true
+
+    // when
+    try! sut.start()
+
+    // then
+    XCTAssertEqual(sut.appState, .notStarted)
+  }
+
+  func testPedometerNotAuthorized_whenStarted_generatesAlert() {
+    // given
+    givenGoalSet()
+    mockPedometer.permissionDeclined = true
+    let exp = expectation(forNotification: AlertNotification.name, object: nil, handler: alertHandler(.notAuthorized))
+
+    // when
+    try! sut.start()
+
+    // then
+    wait(for: [exp], timeout: 1)
+  }
+
+  func testAppModel_whenDeniedAuthAfterStart_generatesAlert() {
+    // given
+    givenGoalSet()
+    mockPedometer.error = MockPedometer.notAuthorizedError
+    let exp = expectation(forNotification: AlertNotification.name,
+                          object: nil,
+                          handler: alertHandler(.notAuthorized))
+
+    // when
+    try! sut.start()
+
+    // then
+    wait(for: [exp], timeout: 1)
+  }
+
+  func testModel_whenPedometerUpdates_updatesDataModel() {
+    // given
+    givenInProgress()
+    let data = MockData(steps: 100, distanceTravelled: 10)
+
+    // when
+    mockPedometer.sendData(data)
+
+    // then
+    XCTAssertEqual(sut.dataModel.steps, 100)
+    XCTAssertEqual(sut.dataModel.distance, 10)
+  }
 }

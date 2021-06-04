@@ -159,6 +159,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="miQ-Nr-1KL" userLabel="Main Area">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <connections>
+                                    <segue destination="BYZ-38-t0r" kind="embed" id="9ET-Hg-2PT"/>
+                                </connections>
+                            </containerView>
                             <containerView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pPy-L5-4dr" userLabel="Toast Area">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
                                 <color key="backgroundColor" name="DefaultAlertColor"/>
@@ -167,12 +173,6 @@
                                 </constraints>
                                 <connections>
                                     <segue destination="G5B-fw-EJj" kind="embed" id="xtL-6e-9m9"/>
-                                </connections>
-                            </containerView>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="miQ-Nr-1KL" userLabel="Main Area">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <connections>
-                                    <segue destination="BYZ-38-t0r" kind="embed" id="9ET-Hg-2PT"/>
                                 </connections>
                             </containerView>
                         </subviews>

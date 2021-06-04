@@ -26,23 +26,38 @@
 /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 /// THE SOFTWARE.
 
-import UIKit
+import Foundation
+import CoreMotion
+@testable import FitNess
 
-class RootViewController: UIViewController {
-  @IBOutlet weak var alertHeight: NSLayoutConstraint!
-  @IBOutlet weak var alertContainer: UIView!
+class MockPedometer: Pedometer {
 
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    reset()
+  private(set) var started: Bool = false
 
-    AlertCenter.listenForAlerts { center in
-      self.alertContainer.isHidden = center.alertCount == 0
+  var pedometerAvailable: Bool = true
+  var permissionDeclined: Bool = false
+  var error: Error?
+
+  var updateBlock: ((Error?) -> Void)?
+  var dataBlock: ((PedometerData?, Error?) -> Void)?
+
+  func start(dataUpdates: @escaping (PedometerData?, Error?) -> Void, eventUpdates: @escaping (Error?) -> Void) {
+    started = true
+    updateBlock = eventUpdates
+    dataBlock = dataUpdates
+    
+    DispatchQueue.global(qos: .default).async {
+      self.updateBlock?(self.error)
     }
   }
 
-  // resets the view to the didLoad state
-  func reset() {
-    alertContainer.isHidden = true
+  func sendData(_ data: PedometerData?) {
+      dataBlock?(data, error)
   }
+
+  static let notAuthorizedError =
+    NSError(domain: CMErrorDomain,
+            code: Int(CMErrorMotionActivityNotAuthorized.rawValue),
+            userInfo: nil)
+
 }

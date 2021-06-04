@@ -32,7 +32,9 @@ import Foundation
 // note: no AlertTests because alert is a pure data object
 class Alert {
 
-  enum Severity { case good, bad }
+  enum Severity {
+    case good, bad
+  }
 
   let text: String
   let severity: Severity

@@ -60,6 +60,13 @@ class StepCountController: UIViewController {
         self.updateUI()
       }
     }
+    
+    NotificationCenter.default
+      .addObserver(forName: DataModel.UpdateNotification,
+                   object: nil,
+                   queue: nil) { _ in
+                    self.updateUI()
+    }
   }
 
   func updateUI() {
@@ -142,5 +149,10 @@ extension StepCountController {
 extension StepCountController {
   private func updateChaseView() {
     chaseView.state = AppModel.instance.appState
+    let dataModel = AppModel.instance.dataModel
+    let runner = Double(dataModel.steps) / Double(dataModel.goal ?? 10_000)
+    let nessie = dataModel.nessie.distance > 0 ?
+      dataModel.distance / dataModel.nessie.distance : 0
+    chaseView.updateState(runner: runner, nessie: nessie)
   }
 }

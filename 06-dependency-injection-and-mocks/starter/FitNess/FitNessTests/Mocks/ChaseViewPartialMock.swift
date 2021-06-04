@@ -26,23 +26,17 @@
 /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 /// THE SOFTWARE.
 
-import UIKit
+@testable import FitNess
 
-class RootViewController: UIViewController {
-  @IBOutlet weak var alertHeight: NSLayoutConstraint!
-  @IBOutlet weak var alertContainer: UIView!
+class ChaseViewPartialMock: ChaseView {
+  var updateStateCalled = false
+  var lastRunner: Double?
+  var lastNessie: Double?
 
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    reset()
-
-    AlertCenter.listenForAlerts { center in
-      self.alertContainer.isHidden = center.alertCount == 0
-    }
-  }
-
-  // resets the view to the didLoad state
-  func reset() {
-    alertContainer.isHidden = true
+  override func updateState(runner: Double, nessie: Double) {
+    updateStateCalled = true
+    lastRunner = runner
+    lastNessie = nessie
+    super.updateState(runner: runner, nessie: nessie)
   }
 }

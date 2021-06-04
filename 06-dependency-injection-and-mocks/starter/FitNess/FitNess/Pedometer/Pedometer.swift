@@ -26,23 +26,18 @@
 /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 /// THE SOFTWARE.
 
-import UIKit
+import Foundation
 
-class RootViewController: UIViewController {
-  @IBOutlet weak var alertHeight: NSLayoutConstraint!
-  @IBOutlet weak var alertContainer: UIView!
+protocol PedometerData {
+  var steps: Int { get }
+  var distanceTravelled: Double { get }
+}
 
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    reset()
+protocol Pedometer {
 
-    AlertCenter.listenForAlerts { center in
-      self.alertContainer.isHidden = center.alertCount == 0
-    }
-  }
-
-  // resets the view to the didLoad state
-  func reset() {
-    alertContainer.isHidden = true
-  }
+  var pedometerAvailable: Bool { get }
+  var permissionDeclined: Bool { get }
+  func start(
+    dataUpdates: @escaping (PedometerData?, Error?) -> Void,
+    eventUpdates: @escaping (Error?) -> Void)
 }

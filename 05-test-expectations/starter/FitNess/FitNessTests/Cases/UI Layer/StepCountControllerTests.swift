@@ -41,6 +41,7 @@ class StepCountControllerTests: XCTestCase {
   }
 
   override func tearDown() {
+    AlertCenter.instance.clearAlerts()
     AppModel.instance.restart()
     sut.updateUI()
     super.tearDown()
@@ -70,10 +71,22 @@ class StepCountControllerTests: XCTestCase {
   func givenCompleted() {
     AppModel.instance.setToComplete()
   }
-  
+
+  func expectTextChange() -> XCTestExpectation {
+    return keyValueObservingExpectation(for: sut.startButton as Any, keyPath: "titleLabel.text")
+  }
+
   // MARK: - When
   fileprivate func whenStartStopPauseCalled() {
     sut.startStopPause(nil)
+  }
+
+  func whenCaught() {
+    AppModel.instance.setToCaught()
+  }
+
+  func whenCompleted() {
+    AppModel.instance.setToComplete()
   }
 
   // MARK: - Initial State
@@ -170,6 +183,34 @@ class StepCountControllerTests: XCTestCase {
 
     // then
     XCTAssertEqual(AppModel.instance.appState, .notStarted)
+  }
+
+  func testController_whenCaught_buttonLabelIsTryAgain() {
+    // given
+    givenInProgress()
+    let exp = expectTextChange()
+
+    // when
+    whenCaught()
+
+    // then
+    wait(for: [exp], timeout: 1)
+    let text = sut.startButton.title(for: .normal)
+    XCTAssertEqual(text, AppState.caught.nextStateButtonLabel)
+  }
+
+  func testController_whenComplete_buttonLabelIsStartOver() {
+    // given
+    givenInProgress()
+    let exp = expectTextChange()
+
+    // when
+    whenCompleted()
+
+    // then
+    wait(for: [exp], timeout: 1)
+    let text = sut.startButton.title(for: .normal)
+    XCTAssertEqual(text, AppState.completed.nextStateButtonLabel)
   }
 
   // MARK: - Chase View
