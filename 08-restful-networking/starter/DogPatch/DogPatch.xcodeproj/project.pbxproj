@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		00D95550266A9E1E000794CB /* DogPatchClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D9554F266A9E1E000794CB /* DogPatchClientTests.swift */; };
+		00D95559266A9E71000794CB /* DogPatchClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D95558266A9E71000794CB /* DogPatchClient.swift */; };
 		420A276322E4859A00ECCA13 /* GET_Dogs_Response.json in Resources */ = {isa = PBXBuildFile; fileRef = 420A276222E4859A00ECCA13 /* GET_Dogs_Response.json */; };
 		420A276522E485C000ECCA13 /* Data+JSONFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420A276422E485C000ECCA13 /* Data+JSONFile.swift */; };
 		4213CCA0221738DF0047BA3D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4213CC9F221738DF0047BA3D /* AppDelegate.swift */; };
@@ -65,6 +67,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		00D9554F266A9E1E000794CB /* DogPatchClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogPatchClientTests.swift; sourceTree = "<group>"; };
+		00D95558266A9E71000794CB /* DogPatchClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogPatchClient.swift; sourceTree = "<group>"; };
 		420A276222E4859A00ECCA13 /* GET_Dogs_Response.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GET_Dogs_Response.json; sourceTree = "<group>"; };
 		420A276422E485C000ECCA13 /* Data+JSONFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+JSONFile.swift"; sourceTree = "<group>"; };
 		4213CC9C221738DF0047BA3D /* DogPatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DogPatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -134,6 +138,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		00D9554E266A9E09000794CB /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				00D9554F266A9E1E000794CB /* DogPatchClientTests.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		00D95555266A9E29000794CB /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				00D95558266A9E71000794CB /* DogPatchClient.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
 		4213CC93221738DF0047BA3D = {
 			isa = PBXGroup;
 			children = (
@@ -161,7 +181,7 @@
 				4213CCC2221738E90047BA3D /* Controllers */,
 				427CCADB22BC653F00F92FF7 /* Extensions */,
 				4213CCC522173B3D0047BA3D /* Models */,
-				42D837B122B6CE040036C5DD /* Networking */,
+				00D95555266A9E29000794CB /* Networking */,
 				4213CCC4221738EF0047BA3D /* Resources */,
 				4270356F22B6F3E0001080B1 /* ViewModels */,
 				4213CCC3221738ED0047BA3D /* Views */,
@@ -435,20 +455,13 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
-		42D837B122B6CE040036C5DD /* Networking */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Networking;
-			sourceTree = "<group>";
-		};
 		42D837B422B6CF5B0036C5DD /* Cases */ = {
 			isa = PBXGroup;
 			children = (
 				42A1ECB322D742F1001404C8 /* Controllers */,
 				427CCADC22BC654A00F92FF7 /* Extensions */,
 				42D837BA22B6DA450036C5DD /* Models */,
-				42F8CDA822D8A585000D7027 /* Networking */,
+				00D9554E266A9E09000794CB /* Networking */,
 				424E577B22E0D0F600C96D45 /* ViewModels */,
 				42D837C522B6E4460036C5DD /* Views */,
 			);
@@ -470,13 +483,6 @@
 				427CCAD822BC64BF00F92FF7 /* Navigation */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		42F8CDA822D8A585000D7027 /* Networking */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Networking;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -600,6 +606,7 @@
 				42D837BE22B6DAD50036C5DD /* User.swift in Sources */,
 				42335BEF22BD166800E21A72 /* UIView+ApplyShadow.swift in Sources */,
 				9581B4B12316F35D00A78286 /* UIView+NibCreatable.swift in Sources */,
+				00D95559266A9E71000794CB /* DogPatchClient.swift in Sources */,
 				42335BF822BD1D7A00E21A72 /* UITableViewCell+Identifier.swift in Sources */,
 				9581B4B22316F35D00A78286 /* NibCreatable.swift in Sources */,
 				4213CCA0221738DF0047BA3D /* AppDelegate.swift in Sources */,
@@ -628,6 +635,7 @@
 				424E578822E0D87200C96D45 /* TimeInterval+Calendar.swift in Sources */,
 				427CCB0622BC72C900F92FF7 /* UIView+NibCreatableTests.swift in Sources */,
 				427CCAFD22BC705600F92FF7 /* TestViewController.swift in Sources */,
+				00D95550266A9E1E000794CB /* DogPatchClientTests.swift in Sources */,
 				420A276522E485C000ECCA13 /* Data+JSONFile.swift in Sources */,
 				4261B59C22D74D1700E5824D /* TestTableViewCell.swift in Sources */,
 				424E576D22E0C23700C96D45 /* UserTests.swift in Sources */,
